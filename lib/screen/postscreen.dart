@@ -19,6 +19,7 @@ class _PostScreenState extends State<PostScreen> {
   final auth = FirebaseAuth.instance;
   final getdatarefrence = FirebaseDatabase.instance.ref("Priyanshu");
   final searchFilter = TextEditingController();
+  final editcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,9 +72,9 @@ class _PostScreenState extends State<PostScreen> {
           Expanded(
             child: FirebaseAnimatedList(
               query: getdatarefrence,
-              defaultChild: Text("Loading....."),
+              //defaultChild: Text("Loading....."),
               itemBuilder: (context, snapshot, animation, index) {
-                // final title = Text(snapshot.child('title').value.toString());
+                final title = Text(snapshot.child('title').value.toString());
 
                 // final title = Text(snapshot.child('title').value.toString());
 
@@ -92,6 +93,32 @@ class _PostScreenState extends State<PostScreen> {
 
                 return ListTile(
                   title: Text(snapshot.child('title').value.toString()),
+                  subtitle: Text(snapshot.child('id').value.toString()),
+                  trailing: PopupMenuButton(
+                    icon: Icon(Icons.more_vert),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: ListTile(
+                          onTap: () {
+                            Navigator.pop(context);
+                            showMydailaug(
+                              title.toString(),
+                              Text(snapshot.child('id').value.toString())
+                                  as String,
+                            );
+                          },
+                          title: Text("Edit"),
+                          leading: Icon(Icons.edit),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: ListTile(
+                          title: Text("Delete"),
+                          leading: Icon(Icons.delete),
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),
@@ -108,6 +135,38 @@ class _PostScreenState extends State<PostScreen> {
           color: Colors.white,
         ),
       ),
+    );
+  }
+
+  Future<void> showMydailaug(String titlee, String id) async {
+    editcontroller.text = titlee;
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Update"),
+          content: Container(
+            child: TextField(
+              controller: editcontroller,
+              decoration: InputDecoration(),
+            ),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text("Cancel")),
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // getdatarefrence.child(id).update(
+                  //   titlee :editcontroller.text.toLowerCase());
+                },
+                child: Text("Update")),
+          ],
+        );
+      },
     );
   }
 }

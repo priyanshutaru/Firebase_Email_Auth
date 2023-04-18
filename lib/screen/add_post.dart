@@ -54,10 +54,12 @@ class _AddpostScreenState extends State<AddpostScreen> {
                 isloading = true;
               });
 
-              firebasedatabaseref
-                  .child(DateTime.now().microsecondsSinceEpoch.toString())
-                  .set({'title': addcontentcontroller.text.toString()}).then(
-                      (value) {
+              String id = DateTime.now().microsecondsSinceEpoch.toString();
+
+              firebasedatabaseref.child(id).set({
+                'title': addcontentcontroller.text.toString(),
+                'id': id,
+              }).then((value) {
                 Constantss().toastMassege("Post Added Succesfully");
                 setState(() {
                   isloading = false;
