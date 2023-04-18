@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaselecture1/constants/constats.dart';
 import 'package:firebaselecture1/screen/postscreen.dart';
 import 'package:firebaselecture1/screen/sign_up.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isvisiable = true;
   bool isloading = false;
   final _formkey = GlobalKey<FormState>();
   final emailcontrolller = TextEditingController();
@@ -72,12 +74,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     TextFormField(
                       controller: passwordcontroller,
-                      obscureText: true,
+                      obscureText: isvisiable,
                       decoration: InputDecoration(
                         hintText: "Enter Your Password",
                         prefixIcon: Icon(
                           Icons.lock,
                           color: Colors.black,
+                        ),
+                        suffixIcon: CupertinoButton(
+                          onPressed: () {
+                            setState(() {
+                              isvisiable = !isvisiable;
+                            });
+                          },
+                          child: Icon(
+                            isvisiable
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       validator: (value) {
