@@ -14,7 +14,7 @@ class AddpostScreen extends StatefulWidget {
 
 class _AddpostScreenState extends State<AddpostScreen> {
   var isloading = false;
-  final firebasedatabaseref = FirebaseDatabase.instance.ref("data 3");
+  final firebasedatabaseref = FirebaseDatabase.instance.ref("Priyanshu");
   final addcontentcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {

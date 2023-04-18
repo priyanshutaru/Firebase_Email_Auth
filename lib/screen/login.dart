@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             email: emailcontrolller.text,
                             password: passwordcontroller.text)
                         .then((value) {
-                      Constantss().toastMassege(value.user!.email.toString());
+                      Constantss().toastMassege("Login Successfully");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
