@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaselecture1/constants/constats.dart';
 import 'package:firebaselecture1/screen/postscreen.dart';
 import 'package:firebaselecture1/screen/sign_up.dart';
+import 'package:firebaselecture1/screen/verification_with_phone.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -179,6 +180,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 70),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PhoneVerificationScreen()));
+                },
+                child: Container(
+                  height: 45,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(color: Colors.deepPurple, width: 2),
+                  ),
+                  child: Center(child: Text("Login With Phone")),
+                ),
+              )
             ],
           ),
         ),

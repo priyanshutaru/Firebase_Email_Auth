@@ -100,9 +100,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             InkWell(
               onTap: () {
                 if (_formkey.currentState!.validate()) {
-                  // setState(() {
-                  //   isloading = true;
-                  // });
+                  setState(() {
+                    isloading = true;
+                  });
                   _firebaseAuth
                       .createUserWithEmailAndPassword(
                           email: emailcontrolller.text.toString(),
